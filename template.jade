@@ -1,0 +1,77 @@
+doctype html
+html
+	meta(charset="utf-8")
+	head
+		title jack luo test jade used
+	body
+		h1.title#title jack luo test jade use
+		h2 jack luo
+		input(name='type' value='12' type='text')
+		input(name='checkFlag' value='true' type='checkbox' checked)
+		//变量的申明
+		-var temp = 'jack'
+		p #{temp}
+
+		mixin jack
+			p.aa my name is minxi
+		+jack
+
+		mixin args(arg1, arg2)
+			div.args #{arg1} #{arg2}
+		+args("hello", "kitty")
+
+		mixin mix(msg)
+			+args(msg.name, msg.age)
+		+mix({name:"jack", age:28})
+
+		mixin team(args)
+			p #{args}
+			if block
+				block
+			else
+				p no block
+		+team("1")
+			p="block is me!"
+
+
+		mixin attr(name)
+			p(class != attributes.class) #{name}
+		+attr("jack")(class="magic")
+
+
+		mixin attrs(name)
+			p&attributes(attributes) #{name}
+		+attrs("jack")(class="jade", id="jade")
+
+		mixin attres(name, ...items)
+			each att in items
+				p #{att} #{name}
+		+attres("jack", "node", "express")
+
+		//each
+		-var arrs = ["node", "jade", "vue"]
+		-each arr in arrs
+			p=arr
+
+		//for
+		-var jsonObj = {name : "jack", "age": 22}
+		-for (var per in jsonObj)
+			p=jsonObj[per]
+
+		input(type="checkbox", checked)
+		input(
+			type="checkbox"
+			name="agreement"
+			checked
+		)
+		
+		button.link#test(name="test")
+		
+		-var friends = 10
+		case friends
+			when 0
+				p 0
+			when 1
+				p 1
+			default
+				p default
